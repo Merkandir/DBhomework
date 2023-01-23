@@ -223,7 +223,8 @@ def find_client(conn, name=None, surname=None, email=None, number=None):
                     """, (phone_result[0][2],))
                     phone_result = cursor.fetchall()
 
-                    print(f'Данные клиента - ID - {user_result[0][0]}\n'
+                    print(f'Данные клиента:\n'
+                          f'ID - {user_result[0][0]}\n'
                           f'Имя - {user_result[0][1]}\n'
                           f'Фамилия - {user_result[0][2]}\n'
                           f'Email - {user_result[0][3]}\n'
@@ -257,25 +258,24 @@ def find_client(conn, name=None, surname=None, email=None, number=None):
                     else:
                         phone_number = 'отсутствуют в базе данных.'
 
-                    print(f'Данные клиента - ID - {result[0][0]}\n'
+                    print(f'Данные клиента:\n'
+                          f'ID - {result[0][0]}\n'
                           f'Имя - {result[0][1]}\n'
                           f'Фамилия - {result[0][2]}\n'
                           f'Email - {result[0][3]}\n'
                           f'Номер телефона - {phone_number}\n')
 
                 else:
-                    print('Клиент не найден!\n')
+                    print(f'Клиент с данными:\n'
+                          f'Имя - {name}\n'
+                          f'Фамилия - {surname}\n'
+                          f'Email - {email}\n'
+                          f'Номер телефона - {number}\n'
+                          f'Не найден!\n')
 
             except Exception as _ex:
                 print(f'Ошибка поиска клиента, {_ex}. Причина - ', type(_ex))
                 print()
-        else:
-            print(f'Клиента с данными:'
-                  f'Имя - {name}'
-                  f'Фамилия - {surname}'
-                  f'Email - {email}'
-                  f'Номер телефона - {number}'
-                  f'Не найден!')
 
 
 with psycopg2.connect(database="clients_db", user="postgres", password="123") as conn:
